@@ -6,7 +6,6 @@ This is a buildroot-fork for RasPlayer, a Raspberry Pi based in-car music player
 
 ```
     make rasplayer_defconfig
-    make nconfig                    #Change root password
     time nice make
 ```
 
@@ -20,6 +19,9 @@ This is a buildroot-fork for RasPlayer, a Raspberry Pi based in-car music player
 | 1   | FAT32 | 50 MB  | /boot        | Copy ```output/zImage``` and ```output/rpi-firmware/*``` here.
 | 2   | None  | 100 MB | /            | Write ```output/images/rootfs.ext2``` here.
 | 3   | ext2  | ------ | /media/music | Used for storing music.
+
+# Miscellaneous Notes
+* The root password is 'password'.
 
 # See Also
 * Buildroot docs: http://buildroot.org/downloads/manual/manual.html
