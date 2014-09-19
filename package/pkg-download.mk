@@ -56,7 +56,7 @@ notdomain=$(patsubst $(call domain,$(1),$(2))$(call domainseparator,$(2))%,%,$(c
 domainseparator=$(if $(1),$(1),/)
 
 # github(user,package,version): returns site of GitHub repository
-github = https://github.com/$(1)/$(2)/archive/$(3)
+github = https://github.com/$(1)/$(2)/tarball/$(3)
 
 # Helper for checking a tarball's checksum
 # If the hash does not match, remove the incorrect file
