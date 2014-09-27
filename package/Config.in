@@ -134,6 +134,7 @@ if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 endif
 	source "package/tree/Config.in"
 	source "package/yasm/Config.in"
+	source "package/hellod/Config.in"
 endmenu
 
 menu "Filesystem and flash utilities"
