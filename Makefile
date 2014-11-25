@@ -850,7 +850,8 @@ help:
 	@echo '  toolchain              - build toolchain'
 	@echo '  <package>-rebuild      - force recompile <package>'
 	@echo '  <package>-reconfigure  - force reconfigure <package>'
-	@echo '  <package>-graph-depends    - generate graph of the dependency tree for package'
+	@echo '  <package>-graph-depends- generate graph of the dependency tree for package'
+	@echo '  rpi-update             - update image on SD card (assumed to be last device)'
 	@echo
 	@echo 'Configuration:'
 	@echo '  menuconfig             - interactive curses-based configurator'
@@ -930,6 +931,20 @@ release:
 
 print-version:
 	@echo $(BR2_VERSION_FULL)
+
+rpi-update: world
+	$(eval MNT := $(shell mktemp -d))
+	$(eval DEV := $(shell ls /dev/sd? | tail -n1))
+	@echo "Installing to $(DEV)..."
+	test -b $(DEV)1 -a -b $(DEV)2
+	# update kernel
+	sudo mount $(DEV)1 $(MNT)
+	sudo cp output/build/linux-rpi-3.14.y/arch/arm/boot/zImage $(MNT)/kernel.img
+	sudo umount $(MNT)
+	rm -r $(MNT)
+	# update rootfs
+	sudo bar -if output/images/rootfs.ext2 -of $(DEV)2
+	sync
 
 include docs/manual/manual.mk
 
