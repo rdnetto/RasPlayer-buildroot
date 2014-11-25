@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+# Start the network....
+#
+
+case "$1" in
+  start)
+ 	# Needed to allow the USB NIC enough time to initialise
+ 	echo "Waiting for eth0..."
+ 	while ! grep -q eth0 /proc/net/dev; do usleep 100000; done
+
+ 	echo "Starting network..."
+	/sbin/ifup -a
+	;;
+  stop)
+	echo -n "Stopping network..."
+	/sbin/ifdown -a
+	;;
+  restart|reload)
+	"$0" stop
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
+
