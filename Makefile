@@ -939,7 +939,7 @@ rpi-update: world
 	test -b $(DEV)1 -a -b $(DEV)2
 	# update kernel
 	sudo mount $(DEV)1 $(MNT)
-	sudo cp output/build/linux-rpi-3.14.y/arch/arm/boot/zImage $(MNT)/kernel.img
+	sudo cp output/build/linux-$(BR2_LINUX_KERNEL_VERSION)/arch/arm/boot/zImage $(MNT)/kernel.img
 	sudo umount $(MNT)
 	rm -r $(MNT)
 	# update rootfs
